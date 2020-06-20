@@ -9,5 +9,4 @@ public class OrganizelApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizelApplication.class, args);
 	}
-
 }
