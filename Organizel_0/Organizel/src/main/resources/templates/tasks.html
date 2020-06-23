@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+
+    <div>
+        <form method = "post" action="/tasks">
+            <input type="text" name="task" placeholder="new task">
+            <input type="date" name="date" placeholder="date">
+            <button type="submit">Add task</button>
+        </form>
+    </div>
+    <div>Your current tasks</div>
+    <table>
+        <thead>
+        <tr>
+            <th> Task </th>
+            <th> Date </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${tasks.empty}">
+            <td colspan="2"> No tasks Available </td>
+        </tr>
+        <tr th:each="task : ${tasks}">
+            <td><span th:text="${task.task}"> Task </span></td>
+            <td><span th:text="${task.date}"> Date </span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <form method="post" action="find">
+            <input type="text" name="text" placeholder="search in tasks">
+            <button type="submit">Find</button>
+        </form>
+    </div>
+</body>
+</html>
