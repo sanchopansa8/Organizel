@@ -24,6 +24,7 @@
         <tr>
             <th> Task </th>
             <th> Date </th>
+            <th> User </th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
         <tr th:each="task : ${tasks}">
             <td><span th:text="${task.task}"> Task </span></td>
             <td><span th:text="${task.date}"> Date </span></td>
+            <td><span th:text="${task.authorName}">User</span></td>
         </tr>
         </tbody>
     </table>
