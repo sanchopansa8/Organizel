@@ -28,19 +28,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${tasks.empty}">
-            <td colspan="2"> No tasks Available </td>
-        </tr>
+
         <tr th:each="task : ${tasks}">
             <td><span th:text="${task.task}"> Task </span></td>
             <td><span th:text="${task.date}"> Date </span></td>
             <td><span th:text="${task.authorName}">User</span></td>
+            <td>
+                <form method="post" th:action="@{/tasks/remove}">
+                    <input type="hidden" name="task" th:value="${task.id}">
+                <button type="submit">remove</button>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>
 
     <div>
-        <form method="post" action="find">
+        <form method="post" action="/tasks/find" >
             <input type="text" name="text" placeholder="search in tasks">
             <button type="submit">Find</button>
         </form>
