@@ -1,5 +1,5 @@
 
 body {
-    background: url(../img/reef.jpg)  no-repeat center center fixed;
+    background: url(/static/img/reef.jpg)  no-repeat center center fixed;
     background-size: cover;
 }
