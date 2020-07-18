@@ -9,23 +9,16 @@
 <table>
     <thead>
     <tr>
-        <th> Task </th>
-        <th> Date </th>
-        <th> User </th>
+        <th> Name </th>
+        <th> Role </th>
     </tr>
     </thead>
     <tbody>
 
     <tr th:each="user : ${users}">
-        <td><span th:text="${user.id}"> User ID </span></td>
         <td><span th:text="${user.username}"> User Name </span></td>
-        <td>
-            <form method="post" th:action="@{/tasks/remove}">
-                <input type="hidden" name="task" th:value="${user.id}">
-                <button type="submit">remove</button>
-            </form>
-        </td>
-
+        <td><span th:each="role,iterStat : ${user.roles}" th:text="${!iterStat.last} ? ${role} + ',': ${role}"></span></td>
+        <td><a th:href="@{|/user/${user.id}|}">edit</a></td>
     </tr>
     </tbody>
 </table>

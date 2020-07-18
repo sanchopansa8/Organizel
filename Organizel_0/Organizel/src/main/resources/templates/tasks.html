@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
-</head>
-<body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <div>
+</head>
+<body class="text-center">
+<nav th:insert="~{patterns.html::nav}"></nav>
+<div class="form-group">
         <form method = "post" action="/tasks">
-            <input type="text" name="task" placeholder="new task">
-            <input type="date" name="date" placeholder="date">
-            <button type="submit">Add task</button>
+            <input class="form-control" type="text" name="task" placeholder="new task">
+            <input class="form-control" type="date" name="date" placeholder="date">
+            <button class="btn btn-primary" type="submit">Add task</button>
         </form>
     </div>
     <div>Your current tasks</div>
@@ -34,9 +31,9 @@
             <td><span th:text="${task.date}"> Date </span></td>
             <td><span th:text="${task.authorName}">User</span></td>
             <td>
-                <form method="post" th:action="@{/tasks/remove}">
-                    <input type="hidden" name="task" th:value="${task.id}">
-                <button type="submit">remove</button>
+                <form  class="form-group" method="post" th:action="@{/tasks/remove}">
+                    <input class="form-control"  type="hidden" name="task" th:value="${task.id}">
+                <button class="btn btn-primary" type="submit">Remove</button>
                 </form>
             </td>
 
@@ -45,10 +42,11 @@
     </table>
 
     <div>
-        <form method="post" action="/tasks/find" >
-            <input type="text" name="text" placeholder="search in tasks">
-            <button type="submit">Find</button>
+        <form class="form-group" method="post" action="/tasks/find" >
+            <input class="form-control" type="text" name="text" placeholder="search in tasks">
+            <button class="btn btn-primary" type="submit">Find</button>
         </form>
     </div>
+<script th:insert="~{patterns.html::bootstrap}"></script>
 </body>
 </html>

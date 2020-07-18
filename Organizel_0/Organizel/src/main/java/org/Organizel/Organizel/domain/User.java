@@ -1,9 +1,12 @@
 package org.Organizel.Organizel.domain;
 
+import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -13,9 +16,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message = "Username can't be empty")
+    @Size(min = 4, message = "Name must be at least 4 characters long")
     private String username;
+
+    @NotBlank(message = "Password can't be empty")
+    @Size(min = 6, message = "size of password must be at least 6 characters")
     private String password;
     private boolean active;
+
+
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))

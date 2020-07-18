@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>login </title>
+    <title>Log in</title>
+    <link th:insert="patterns.html::head">
+    <link href="../static/styles/signin.css" type="text/css" rel="stylesheet">
 </head>
-<body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><p><label> User Name : <input type="text" name="username"/> </label></p></div>
-    <div><p><label> Password: <input type="password" name="password"/> </label></p></div>
-    <div><input type="submit" value="Sign In"/></div>
+<body class="text-center">
+<nav th:insert="~{patterns.html::nav}"></nav>
+<div class="warn mt-5" th:if="${param.error}">Invalid username or password.</div>
+<div class="warn mt-5" th:if="${param.logout}">You have been logged out.</div>
+<div class="container mt-3">
+<form th:action="@{/login}" method="post" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label class="sr-only"> User Name: </label>
+    <input type="text" name="username" placeholder="User name" class="form-control"/>
+    <label class="sr-only"> Password:</label>
+    <input type="password" id="inputPassword" name="password" placeholder="Password" class="form-control"/>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
-<a href="/registration">register</a>
+    <a href="/registration">Don't have an account?</a>
+</div>
+<div th:insert="~{patterns.html::bootstrap}"></div>
 </body>
 </html>

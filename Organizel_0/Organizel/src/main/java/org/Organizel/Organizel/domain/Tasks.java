@@ -1,5 +1,7 @@
 package org.Organizel.Organizel.domain;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -12,6 +14,7 @@ public class Tasks {
 
     private String task;
 
+    @Nullable
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
