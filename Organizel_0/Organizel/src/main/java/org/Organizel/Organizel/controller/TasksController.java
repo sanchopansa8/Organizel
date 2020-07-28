@@ -25,6 +25,10 @@ public class TasksController {
         return "tasks";
     }
 
+    @GetMapping("/add")
+    public String showAdd(){
+        return "add";
+    }
     @PostMapping
     public String add(@AuthenticationPrincipal User user, @RequestParam String task, @RequestParam Date date, Map<String, Object> model){
         Tasks newTask = new Tasks(task,date,user);
@@ -38,7 +42,9 @@ public class TasksController {
         Iterable<Tasks> tasksList;
         if(text==null || text.isEmpty()){
             tasksList = tasksRepository.findAllByAuthor(user);
-        }else {tasksList = tasksRepository.findByTaskContaining(text);}
+        }else {
+            tasksList = tasksRepository.findByTaskContainingAndAuthor(text,user);
+        }
         model.put("tasks",tasksList);
         return "tasks";
     }

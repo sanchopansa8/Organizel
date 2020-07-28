@@ -1,5 +1,10 @@
 
 body {
-    background: url(../img/reef.jpg)  no-repeat center center fixed;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(223,156,194,0.45171572046787467) 0%, rgba(209,175,255,0.7570378493194152) 100%, rgba(74,138,200,1) 100%),url(../img/ny.jpg)  no-repeat center center fixed;
     background-size: cover;
+
+}
+h2{
+    font-weight: bolder;
 }

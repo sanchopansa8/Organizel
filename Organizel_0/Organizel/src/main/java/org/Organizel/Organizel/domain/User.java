@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
@@ -18,11 +19,11 @@ public class User implements UserDetails {
     private Long id;
 
     @NotBlank(message = "Username can't be empty")
-    @Size(min = 4, message = "Name must be at least 4 characters long")
+    @Size(min = 4, max = 20,message = "Name must be at least 4 characters long")
     private String username;
 
     @NotBlank(message = "Password can't be empty")
-    @Size(min = 6, message = "size of password must be at least 6 characters")
+    @Size(min = 6,max = 20, message = "Password must be at least 6 characters long")
     private String password;
     private boolean active;
 

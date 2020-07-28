@@ -14,3 +14,8 @@ form{
     color: #c83527;
     align-items: center;
 }
+.validation-error{
+    font-size: medium;
+    color: #c83527;
+    align-items: center;
+}

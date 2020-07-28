@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TasksRepository extends CrudRepository<Tasks,Integer> {
 
-    List<Tasks> findByTaskContaining(String word);
+    List<Tasks> findByTaskContainingAndAuthor(String word,User user);
     List<Tasks> findAllByAuthor(User author);
 }

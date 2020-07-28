@@ -3,6 +3,7 @@ package org.Organizel.Organizel.domain;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
 @Entity
@@ -12,9 +13,10 @@ public class Tasks {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
+    @NotBlank(message = "Task can't be empty")
     private String task;
 
-    @Nullable
+    @NotBlank(message = "Date can't be empty")
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
