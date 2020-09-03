@@ -1,7 +1,5 @@
 package org.Organizel.Organizel.domain;
 
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
@@ -16,7 +14,6 @@ public class Tasks {
     @NotBlank(message = "Task can't be empty")
     private String task;
 
-    @NotBlank(message = "Date can't be empty")
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)

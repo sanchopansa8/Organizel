@@ -1,0 +1,25 @@
+.btn-circle {
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 60% !important;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px !important;
+}
+
+.btn-outline-success {
+    border-color: #8064a2 !important;
+    color: black;
+}
+.btn-outline-success,.btn-outline-success:active, .btn-outline-success:visited {
+    background-color: #8064a2 !important;
+    border-color: #8064a2;
+}
+.btn-outline-success:hover{
+    background-color: #674b87 !important;
+    border-color: #674b87 !important;
+}

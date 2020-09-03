@@ -3,42 +3,48 @@ package org.Organizel.Organizel.controller;
 import org.Organizel.Organizel.domain.Tasks;
 import org.Organizel.Organizel.domain.User;
 import org.Organizel.Organizel.repos.TasksRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/tasks")
 public class TasksController {
 
-    @Autowired
-    private TasksRepository tasksRepository;
+    private final TasksRepository tasksRepository;
+
+    public TasksController(TasksRepository tasksRepository) {
+        this.tasksRepository = tasksRepository;
+    }
 
     @GetMapping
-    public String tasks(@AuthenticationPrincipal User user, Map<String, Object> model){
+    public String tasks(@AuthenticationPrincipal User user, @ModelAttribute(name = "taskObj")Tasks task, Model model){
         Iterable<Tasks> tasks = tasksRepository.findAllByAuthor(user);
-        model.put("tasks",tasks);
+        model.addAttribute("tasks",tasks);
         return "tasks";
     }
-
-    @GetMapping("/add")
-    public String showAdd(){
-        return "add";
-    }
     @PostMapping
-    public String add(@AuthenticationPrincipal User user, @RequestParam String task, @RequestParam Date date, Map<String, Object> model){
-        Tasks newTask = new Tasks(task,date,user);
-        tasksRepository.save(newTask);
+    public String add(
+            @ModelAttribute(name = "taskObj") @Valid Tasks taskObj,
+            @AuthenticationPrincipal User user,
+            BindingResult bindingResult,
+            Model model){
+        if(bindingResult.hasErrors()){
+            return "tasks";
+        }
+        taskObj.setAuthor(user);
+        tasksRepository.save(taskObj);
         Iterable<Tasks> tasks = tasksRepository.findAllByAuthor(user);
-        model.put("tasks",tasks);
+        model.addAttribute("tasks",tasks);
         return "tasks";
     }
     @PostMapping("/find")
-    public String find(@AuthenticationPrincipal User user,@RequestParam String text, Map<String, Object> model){
+    public String find(@AuthenticationPrincipal User user,@RequestParam String text, @ModelAttribute(name = "taskObj")Tasks task, Map<String, Object> model){
         Iterable<Tasks> tasksList;
         if(text==null || text.isEmpty()){
             tasksList = tasksRepository.findAllByAuthor(user);
