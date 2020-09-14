@@ -5,7 +5,7 @@
     <link  href="../static/styles/buttonStyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
+<div class="container -sm">
     <nav class="navbar navbar-expand-sm  navbar-dark bg-dark" th:fragment="nav">
         <a class="navbar-brand" href="/">
             <img src="../static/img/logo1.0.jpg" height="60"  class="d-inline-block align-top" alt="" loading="lazy"></a>
@@ -18,7 +18,7 @@
                     <a class="nav-link" href="/tasks">My tasks<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">About us<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/aboutus">About us<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active" sec:authorize ="hasAuthority('ADMIN')">
                     <a class="nav-link" href="/user" >USERS<span class="sr-only">(current)</span></a>
@@ -31,7 +31,7 @@
                 <button class="btn btn-primary" type="submit">Sign up</button>
             </form>
             <div class="navbar-text mr-3" sec:authorize ="isAuthenticated()"  sec:authentication="name">user name</div>
-            <form  sec:authorize ="isAuthenticated()" class="form-inline my-2 my-lg-0" action="/logout">
+            <form  sec:authorize ="isAuthenticated()" th:method="post"  class="form-inline my-2 my-lg-0" th:action="@{/logout}">
                 <button class="btn btn-primary" type="submit">Sing out</button>
             </form>
         </div>

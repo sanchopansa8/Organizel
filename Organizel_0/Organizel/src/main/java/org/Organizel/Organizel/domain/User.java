@@ -1,6 +1,7 @@
 package org.Organizel.Organizel.domain;
 
 import com.sun.istack.NotNull;
+import org.Organizel.Organizel.repos.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

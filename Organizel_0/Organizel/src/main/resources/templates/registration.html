@@ -11,7 +11,7 @@
 <div class="container mt-3">
 <p class="warn mt-5" th:text="${message}" ></p>
 
-<form action="/registration" th:action="@{/registration}" th:object="${user}" method="post" class="form-signin">
+<form th:action="@{/registration}" th:object="${user}" method="post" class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
     <label class="sr-only"> User Name: </label>
     <input  type="text" th:field="*{username}" name="username" placeholder="User name" class="form-control" />

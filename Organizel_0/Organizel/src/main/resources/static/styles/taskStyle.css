@@ -1,7 +1,7 @@
 .btn-circle {
-    display: flex;
-    justify-content: flex-start;
-    position: fixed;
+   /* display: flex;
+    justify-content: flex-start;*/
+   /* position: fixed;*/
     width: 38px !important;
     height: 38px !important;
     border-radius: 60% !important;

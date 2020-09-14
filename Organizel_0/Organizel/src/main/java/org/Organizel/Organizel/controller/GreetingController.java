@@ -22,4 +22,10 @@ public class GreetingController {
         return "home";
     }
 
+    @GetMapping("/aboutus")
+    public String aboutUs(){
+        return "aboutus";
+    }
+
+
 }

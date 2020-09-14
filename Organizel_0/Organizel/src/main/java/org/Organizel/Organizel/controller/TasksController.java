@@ -28,20 +28,20 @@ public class TasksController {
         model.addAttribute("tasks",tasks);
         return "tasks";
     }
-    @PostMapping
+    @PostMapping("/add")
     public String add(
             @ModelAttribute(name = "taskObj") @Valid Tasks taskObj,
             @AuthenticationPrincipal User user,
             BindingResult bindingResult,
             Model model){
         if(bindingResult.hasErrors()){
-            return "tasks";
+            return "redirect:/tasks";
         }
         taskObj.setAuthor(user);
         tasksRepository.save(taskObj);
         Iterable<Tasks> tasks = tasksRepository.findAllByAuthor(user);
         model.addAttribute("tasks",tasks);
-        return "tasks";
+        return "redirect:/tasks";
     }
     @PostMapping("/find")
     public String find(@AuthenticationPrincipal User user,@RequestParam String text, @ModelAttribute(name = "taskObj")Tasks task, Map<String, Object> model){

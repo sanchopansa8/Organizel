@@ -42,12 +42,12 @@
         </tbody>
     </table>
     <!-- Button trigger modal -->
-    <div class="d-flex justify-content-around">
-    <button type="button"  class="btn btn-primary btn-circle mx-auto" data-toggle="modal" data-target="#exampleModal">ADD</button>
+    <div>
+    <button type="button"  class="btn btn-primary btn-circle mx-auto my-sm-0" data-toggle="modal" data-target="#exampleModal">ADD</button>
     </div>
 </div>
     <!-- Modal -->
-    <div class="container">
+    <div class="container -sm">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content">
@@ -58,17 +58,17 @@
                         </button>
                     </div>
                     <div class="form-group">
-                        <form id="myForm" th:action="@{/tasks}" th:object="${taskObj}" method = "post" >
+                        <form id="myForm" th:action="@{/tasks/add}" th:object="${taskObj}" method = "post" >
                     <div class="modal-body">
                         <label class="sr-only"> Task: </label>
                         <input class="form-control" type="text" name="taskText" th:field="*{task}" placeholder="new task">
                         <span class="validation-error" th:if="${#fields.hasErrors('task')}" th:errors="*{task}">Text Error</span>
                         <label class="sr-only"> Date: </label>
-                        <input class="form-control" type="date" name="date" th:field = "*{date}" placeholder="date">
+                        <input id="myDate" class="form-control" type="date" name="date" th:field = "*{date}" placeholder="date">
                         <span class="validation-error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</span>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Add task</button>
+                        <button class="btn btn-primary"  type="submit">Add task</button>
                     </div>
                         </form>
                     </div>
@@ -76,11 +76,6 @@
             </div>
         </div>
     </div>
-<script>
-    function myFunction() {
-        document.getElementById("myForm").reset();
-    }
-</script>
 <div th:insert="~{patterns.html::bootstrap}"></div>
 </body>
 </html>
