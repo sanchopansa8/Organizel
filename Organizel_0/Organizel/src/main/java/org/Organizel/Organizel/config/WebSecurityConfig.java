@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder(8);
+        return new BCryptPasswordEncoder();
     };
 
     @Override
@@ -42,7 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .rememberMe().rememberMeParameter("remember-me")
+                .rememberMe()
+                .key("rem-me-key")
+                .rememberMeParameter("remember-me")
+                .rememberMeCookieName("rememberlogin")
+                .tokenValiditySeconds(100)
                 .and()
                 .logout()
                 .permitAll();

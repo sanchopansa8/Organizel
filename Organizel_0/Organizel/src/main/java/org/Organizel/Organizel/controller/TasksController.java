@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.Map;
 
 @Controller
@@ -44,14 +45,15 @@ public class TasksController {
         return "redirect:/tasks";
     }
     @PostMapping("/find")
-    public String find(@AuthenticationPrincipal User user,@RequestParam String text, @ModelAttribute(name = "taskObj")Tasks task, Map<String, Object> model){
+    public String find(@AuthenticationPrincipal User user,@RequestParam String text, @ModelAttribute(name = "taskObj")Tasks task, Model model){
         Iterable<Tasks> tasksList;
         if(text==null || text.isEmpty()){
-            tasksList = tasksRepository.findAllByAuthor(user);
+            model.addAttribute("message","Nothing found :(");
+            tasksList = null;
         }else {
             tasksList = tasksRepository.findByTaskContainingAndAuthor(text,user);
         }
-        model.put("tasks",tasksList);
+        model.addAttribute("tasks",tasksList);
         return "tasks";
     }
     @PostMapping("/remove")
@@ -60,6 +62,22 @@ public class TasksController {
         tasksRepository.deleteById(taskId);
         Iterable<Tasks> tasks = tasksRepository.findAllByAuthor(user);
         model.put("tasks",tasks);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/edit")
+    public String editTask(@AuthenticationPrincipal User user, @ModelAttribute(name = "taskObj") @Valid Tasks taskObj, Model model){
+
+        Tasks task = tasksRepository.findById(taskObj.getId()).orElse(null);
+
+        if(task != null && !taskObj.getTask().isEmpty()) {
+            tasksRepository.deleteById(taskObj.getId());
+            task.setTask(taskObj.getTask());
+            task.setDate(taskObj.getDate());
+            tasksRepository.save(task);
+        }
+        Iterable<Tasks> tasks = tasksRepository.findAllByAuthor(user);
+        model.addAttribute("tasks",tasks);
         return "redirect:/tasks";
     }
 
